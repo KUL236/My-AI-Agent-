@@ -1,0 +1,48 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <queries>
+        <!-- Speech recognition + Text-to-Speech engine discovery (Android 11+ package visibility) -->
+        <intent><action android:name="android.speech.RecognitionService" /></intent>
+        <intent><action android:name="android.intent.action.TTS_SERVICE" /></intent>
+        <!-- Camera intent must be declared or resolveActivity() always returns null -->
+        <intent><action android:name="android.media.action.IMAGE_CAPTURE" /></intent>
+        <!-- Lets "open <app name>" find launchable apps without QUERY_ALL_PACKAGES -->
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent>
+        <package android:name="com.google.android.youtube" />
+        <package android:name="com.android.chrome" />
+    </queries>
+
+    <application
+        android:allowBackup="false"
+        android:label="SEWA AI"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.SewaAI">
+        <activity
+            android:name="com.sewa.ai.MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name="com.sewa.ai.SewaAccessibilityService"
+            android:exported="false"
+            android:label="SEWA AI Phone Control"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/accessibility_service_config" />
+        </service>
+    </application>
+</manifest>
