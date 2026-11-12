@@ -3,7 +3,7 @@ import express from "express";
 const app = express();
 const port = Number(process.env.PORT || 10000);
 const groqApiKey = process.env.GROQ_API_KEY;
-const model = process.env.GROQ_MODEL || "llama-3.3-70b-versatile";
+const model = process.env.GROQ_MODEL || "llama-3.1-8b-instant";
 const maxMessages = 12;
 
 app.disable("x-powered-by");
